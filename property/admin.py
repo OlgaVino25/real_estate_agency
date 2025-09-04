@@ -12,9 +12,13 @@ class FlatAdmin(admin.ModelAdmin):
         "new_building",
         "construction_year",
         "town",
-        "owners_phonenumber",
-        "owner_pure_phone",
+        "get_owners",
     )
+
+    def get_owners(self, obj):
+        return ", ".join([owner.full_name for owner in obj.owners.all()])
+    get_owners.short_description = 'Владельцы'
+    
     list_editable = ("new_building",)
     list_filter = ("new_building", "rooms_number", "has_balcony")
     raw_id_fields = ("likes",)
