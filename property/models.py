@@ -43,13 +43,15 @@ class Flat(models.Model):
         "Наличие балкона", null=True, blank=True, db_index=True
     )
     active = models.BooleanField("Активно-ли объявление", db_index=True)
-    construction_year = models.IntegerField(
-        "Год постройки здания", null=True, blank=True, db_index=True
-    )
 
     likes = models.ManyToManyField(
         User, related_name="liked_flats", blank=True, verbose_name="Кто лайкнул"
     )
+    
+    construction_year = models.IntegerField(
+        "Год постройки здания", null=True, blank=True, db_index=True
+    )
+
 
     created_at = models.DateTimeField(
         "Когда создано объявление", default=timezone.now, db_index=True
