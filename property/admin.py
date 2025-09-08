@@ -10,7 +10,7 @@ class OwnerInline(admin.TabularInline):
 
 
 class FlatAdmin(admin.ModelAdmin):
-    search_fields = ("town", "address", "owner")
+    search_fields = ("town", "address", "owners__full_name")
     readonly_fields = ("created_at",)
     list_display = (
         "address",
