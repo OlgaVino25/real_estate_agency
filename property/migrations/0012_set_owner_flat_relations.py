@@ -7,7 +7,7 @@ def set_owner_flat_relations(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
     
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         owner = Owner.objects.filter(
             full_name=flat.owner,
             phonenumber=flat.owners_phonenumber
@@ -18,7 +18,7 @@ def set_owner_flat_relations(apps, schema_editor):
 
 def reverse_func(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
-    for owner in Owner.objects.all():
+    for owner in Owner.objects.all().iterator():
         owner.flats.clear()
 
 class Migration(migrations.Migration):
